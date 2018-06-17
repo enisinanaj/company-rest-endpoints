@@ -18,14 +18,14 @@ public class Company {
     private String phone;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
-    private List<BenificialOwner> benificialOwners;
+    private List<BeneficialOwner> beneficialOwners;
 
     public Company() {
     }
 
     public Company(final Long id, final String name,
                    final String address, final String city, final String country,
-                   final String email, final String phone, final List<BenificialOwner> benificialOwners) {
+                   final String email, final String phone, final List<BeneficialOwner> beneficialOwners) {
 
         this.id = id;
         this.name = name;
@@ -34,7 +34,7 @@ public class Company {
         this.country = country;
         this.email = email;
         this.phone = phone;
-        this.benificialOwners = benificialOwners;
+        this.beneficialOwners = beneficialOwners;
     }
 
     public Long getId() {
@@ -93,11 +93,11 @@ public class Company {
         this.phone = phone;
     }
 
-    public List<BenificialOwner> getBenificialOwners() {
-        return benificialOwners;
+    public List<BeneficialOwner> getBeneficialOwners() {
+        return beneficialOwners;
     }
 
-    public void setBenificialOwners(List<BenificialOwner> benificialOwners) {
-        this.benificialOwners = benificialOwners;
+    public void setBeneficialOwners(List<BeneficialOwner> beneficialOwners) {
+        this.beneficialOwners = beneficialOwners;
     }
 }

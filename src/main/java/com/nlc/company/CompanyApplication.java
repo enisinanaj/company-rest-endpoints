@@ -1,8 +1,8 @@
 package com.nlc.company;
 
-import com.nlc.company.repositories.BenificialOwnerRepository;
+import com.nlc.company.repositories.BeneficialOwnerRepository;
 import com.nlc.company.repositories.CompanyRepository;
-import com.nlc.company.resources.BenificialOwner;
+import com.nlc.company.resources.BeneficialOwner;
 import com.nlc.company.resources.Company;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +20,7 @@ public class CompanyApplication {
 	}
 
 	@Bean
-	CommandLineRunner init(CompanyRepository companyRepository, BenificialOwnerRepository benificialOwnerRepository) {
+	CommandLineRunner init(CompanyRepository companyRepository, BeneficialOwnerRepository beneficialOwnerRepository) {
 		return (evt) -> Arrays.asList(
 				"jhoeller,dsyer,pwebb,ogierke,rwinch,mfisher,mpollack,jlong".split(","))
 				.forEach(
@@ -28,7 +28,7 @@ public class CompanyApplication {
 						Company cmp = companyRepository.save(new Company(System.currentTimeMillis(), a, "Infinity Loop 1", "Palo Alto", "California",
 								"info@apple.com", "+1 333 555 7830", new ArrayList<>()));
 
-						benificialOwnerRepository.save(new BenificialOwner(null, a, cmp));
+						beneficialOwnerRepository.save(new BeneficialOwner(null, a, cmp));
 					});
 	}
 }

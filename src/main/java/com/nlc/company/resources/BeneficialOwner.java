@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class BenificialOwner {
+public class BeneficialOwner {
 
     @Id
     @GeneratedValue
@@ -20,10 +20,10 @@ public class BenificialOwner {
     @ManyToOne
     private Company company;
 
-    public BenificialOwner() {
+    public BeneficialOwner() {
     }
 
-    public BenificialOwner(final Long id, final String name, final Company company) {
+    public BeneficialOwner(final Long id, final String name, final Company company) {
         this.id = id;
         this.name = name;
         this.company = company;
