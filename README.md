@@ -270,6 +270,9 @@ gradlew check
 * [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html) - The web framework used
 * [Gradle](https://gradle.org) - Dependency Management
 * [JUnit 4.12](https://junit.org/junit4/) - Testing Framework
+* [JaCoCo](https://www.jacoco.org/jacoco/trunk/index.html) - Java Code Coverage
+* [CodeCov](https://codecov.io/) - JaCoCo integration tool for GitHub
+* [CircleCI](https://circleci.com) - Continuous Integration for GitHub
 
 ## Authors
 
