@@ -30,7 +30,7 @@ To check for bugs and be able to browse them locally you have to download Spotbu
 
 ### Companies (`/companies`)
 
-`POST /companies` to create a new company
+### `POST /companies` to create a new company
 
 ```
 ## Create a new company
@@ -58,7 +58,7 @@ Connection: close
 
 returning a **Location** header that points at the newly created resource.
 
-`GET /companies` to obtain a list of all companies present in the database
+### `GET /companies` to obtain a list of all companies present in the database
 
 ```
 ## Get all companies
@@ -88,7 +88,7 @@ Connection: close
 ]
 ```
 
-`GET /companies/{companyId}` to obtain the information regarding a single company. Example `GET /companies/17` as below
+### `GET /companies/{companyId}` to obtain the information regarding a single company. Example `GET /companies/17` as below
 
 ```
 ## Getting all data of company 17
@@ -118,7 +118,7 @@ Connection: close
 
 > Note that if the given company ID does not exist an HTTP NotFound error will be returned with a 404 status code.
 
-`PATCH /companies/{companyId}` can be used to update one or more fields of the company resource.
+### `PATCH /companies/{companyId}` can be used to update one or more fields of the company resource.
 Curl call example:
 
 ```
@@ -167,7 +167,7 @@ Connection: close
 
 The provided methods for these resources are GET allo beneficial owners of a company and POST (create) a new beneficial owner.
 
-`POST /companies/{companyId}/beneficialOwners` to create a new Beneficial owner
+### `POST /companies/{companyId}/beneficialOwners` to create a new Beneficial owner
 
 ```
 ## Create a new beneficial owner for the given company resource
@@ -188,7 +188,7 @@ Date: Sun, 17 Jun 2018 22:15:40 GMT
 Connection: close
 ```
 
-`GET /companies/{companyId}/beneficialOwners` to obtain all beneficial owners of the given company
+### `GET /companies/{companyId}/beneficialOwners` to obtain all beneficial owners of the given company
 
 ```
 ## Create a new company
@@ -258,6 +258,10 @@ gradlew check
 `TODO`
 
 ## Deployment
+
+`TODO`
+
+## Authentication
 
 `TODO`
 
