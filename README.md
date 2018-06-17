@@ -16,7 +16,7 @@ gradlew bootRun
 or your own gradle installation
 
 ```
-gradlew bootRun
+gradle bootRun
 ```
 
 ### Prerequisites
