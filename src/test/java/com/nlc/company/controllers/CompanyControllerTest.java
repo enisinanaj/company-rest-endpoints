@@ -140,6 +140,58 @@ public class CompanyControllerTest {
         controller.getCompanyById(companyId);
     }
 
+    @Test
+    public void companyWithGivenIdIsModified() {
+        //given
+        CompanyController controller = new CompanyControllerForTest(repositoryMocked);
+        Long companyId = 1L;
+        Company company = createCompanyWithId(companyId);
+        Optional<Company> optionalCompany = Optional.of(company);
+        given(repositoryMocked.findById(companyId)).willReturn(optionalCompany);
+
+        Company newCompanyData = createCompanyWithId(companyId);
+        newCompanyData.setCity("London");
+        newCompanyData.setAddress("Mountain view St.");
+        newCompanyData.setCountry("UK");
+        newCompanyData.setEmail("newComp@comp.com");
+        newCompanyData.setPhone("+44 979307373");
+
+        //when
+        Company result = controller.updateCompany(companyId, newCompanyData);
+
+        //then
+        assert result != null;
+        assert result.getCity().equals("London");
+        assert result.getAddress().equals("Mountain view St.");
+        assert result.getCountry().equals("UK");
+        assert result.getEmail().equals("newComp@comp.com");
+        assert result.getPhone().equals("+44 979307373");
+    }
+
+    @Test(expected=CompanyNotFoundException.class)
+    public void returnsNotFoundErrorIfIdDoesNotExist() {
+        //given
+        CompanyController controller = new CompanyControllerForTest(repositoryMocked);
+        Long companyId = 1L;
+
+        Company newCompanyData = createCompanyWithId(companyId);
+        newCompanyData.setCity("London");
+        newCompanyData.setAddress("Mountain view St.");
+        newCompanyData.setCountry("UK");
+        newCompanyData.setEmail("newComp@comp.com");
+        newCompanyData.setPhone("+44 979307373");
+
+        //when
+        controller.updateCompany(companyId, newCompanyData);
+    }
+
+    private Company createCompanyWithId(long id) {
+        Company company = createCompany(true);
+        company.setId(id);
+
+        return company;
+    }
+
     private Company createCompany(Boolean withOptionals) {
         return new Company(1L, "Apple, INC", "Infinity Loop 1", "Palo Alto", "California",
                 withOptionals ? "info@apple.com" : null, withOptionals ? "+1 333 555 7830" : null, new ArrayList<>());

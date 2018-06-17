@@ -32,9 +32,49 @@ public class CompanyController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PatchMapping
-    public Company updateCompany(@RequestBody Company company) {
-        return null;
+    @RequestMapping(path="/{companyId}", method=RequestMethod.PATCH)
+    public Company updateCompany(@PathVariable Long companyId, @RequestBody Company company) {
+        Company oldCompany = companyRepository.findById(companyId).orElseThrow(() -> new CompanyNotFoundException(companyId));
+
+        updateCity(company, oldCompany);
+        updateAddress(company, oldCompany);
+        updateCountry(company, oldCompany);
+        updateEmail(company, oldCompany);
+        updatePhone(company, oldCompany);
+
+        companyRepository.saveAndFlush(oldCompany);
+
+        return oldCompany;
+    }
+
+    private void updateCity(Company company, Company oldCompany) {
+        if (company.getCity() != null) {
+            oldCompany.setCity(company.getCity());
+        }
+    }
+
+    private void updateCountry(Company company, Company oldCompany) {
+        if (company.getCountry() != null) {
+            oldCompany.setCountry(company.getCountry());
+        }
+    }
+
+    private void updateAddress(Company company, Company oldCompany) {
+        if (company.getAddress() != null) {
+            oldCompany.setAddress(company.getAddress());
+        }
+    }
+
+    private void updateEmail(Company company, Company oldCompany) {
+        if (company.getEmail() != null) {
+            oldCompany.setEmail(company.getEmail());
+        }
+    }
+
+    private void updatePhone(Company company, Company oldCompany) {
+        if (company.getPhone() != null) {
+            oldCompany.setPhone(company.getPhone());
+        }
     }
 
     @GetMapping

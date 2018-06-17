@@ -114,6 +114,49 @@ Connection: close
 }
 ```
 
+`PATCH /companies/{companyId}` can be used to update one or more fields of the company resource.
+Curl call example:
+
+```
+## Update company fields
+curl -X "PATCH" "http://localhost:8080/companies/1" \
+     -H 'Content-Type: application/json' \
+     -d $'{
+  "email": "info@one.com",
+  "phone": "+1 333 555 8294",
+  "country": "USA",
+  "name": "One",
+  "city": "Loop",
+  "address": "Infinite"
+}'
+```
+
+Response:
+
+```
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Sun, 17 Jun 2018 01:40:08 GMT
+Connection: close
+
+{
+    "id": 1,
+    "name": "One",
+    "address": "Infinite",
+    "city": "Loop",
+    "country": "USA",
+    "email": "info@one.com",
+    "phone": "+1 333 555 8294",
+    "benificialOwners": [
+        {
+            "id": 2,
+            "name": "jhoeller"
+        }
+    ]
+}
+```
+
 ## Running the tests
 
 The tests are run easily with the gradle task
