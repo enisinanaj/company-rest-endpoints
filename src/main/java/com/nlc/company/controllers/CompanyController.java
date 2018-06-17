@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/company")
+@RequestMapping("/companies")
 public class CompanyController {
 
     CompanyRepository companyRepository;
@@ -27,9 +27,14 @@ public class CompanyController {
     public ResponseEntity createNewCompany(@RequestBody Company companyData) {
         Company result = this.companyRepository.save(companyData);
 
-        URI uri = getCurrentContextPath().path("/{id}").buildAndExpand(result.getId()).toUri();
+        URI uri = getCurrentContextPath().path("/companies").path("/{id}").buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @PatchMapping
+    public Company updateCompany(@RequestBody Company company) {
+        return null;
     }
 
     @GetMapping
@@ -41,7 +46,7 @@ public class CompanyController {
         return ServletUriComponentsBuilder.fromCurrentContextPath();
     }
 
-    @GetMapping(path="/{id}")
+    @GetMapping(path="/{companyId}")
     public Company getCompanyById(@PathVariable Long companyId) {
         return companyRepository.findById(companyId).orElseThrow(() -> new CompanyNotFoundException(companyId));
     }

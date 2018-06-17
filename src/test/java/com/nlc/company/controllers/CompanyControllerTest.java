@@ -5,6 +5,7 @@ import com.nlc.company.repositories.CompanyRepository;
 import com.nlc.company.resources.Company;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
@@ -20,7 +21,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
 public class CompanyControllerTest {
 
@@ -50,6 +54,7 @@ public class CompanyControllerTest {
         uriComponentsMocked = mock(UriComponents.class);
 
         given(servletUrilMocked.path(anyString())).willReturn(uriComponentBuilderMocked);
+        given(uriComponentBuilderMocked.path(anyString())).willReturn(uriComponentBuilderMocked);
         given(uriComponentBuilderMocked.buildAndExpand(anyLong())).willReturn(uriComponentsMocked);
         given(uriComponentsMocked.toUri()).willReturn(URI.create(LOCATION_URL));
     }
@@ -67,6 +72,11 @@ public class CompanyControllerTest {
         //then
         assert response.getStatusCodeValue() == 201;
         assert response.getHeaders().get("Location").get(0).equals(LOCATION_URL);
+
+        InOrder inOrder = inOrder(servletUrilMocked, uriComponentBuilderMocked);
+
+        inOrder.verify(servletUrilMocked).path("/companies");
+        inOrder.verify(uriComponentBuilderMocked).path("/{id}");
     }
 
     @Test
