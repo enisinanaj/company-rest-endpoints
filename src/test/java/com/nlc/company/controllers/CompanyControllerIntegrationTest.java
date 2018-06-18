@@ -18,6 +18,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -88,7 +90,7 @@ public class CompanyControllerIntegrationTest {
                 .andDo(print()).andExpect(status().isCreated())
                 .andReturn();
 
-        assert mvcResult.getResponse().getHeader("Location").contains("/companies/1");
+        assertThat("location contains companies/1", mvcResult.getResponse().getHeader("Location"), containsString("/companies/1"));
     }
 
     @Test
@@ -112,8 +114,8 @@ public class CompanyControllerIntegrationTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andReturn();
 
-        assert mvcResultFromGet.getResponse().getContentAsString()
-                .contains("\"name\":\"Apple, INC\",\"address\":\"One Infinite Loop\",\"city\":\"Coupertino\",\"country\":\"USA\",\"email\":\"info@apple.com\",\"phone\":\"+1 333 555 8294\",\"beneficialOwners\":[]}");
+        assertThat("getter result", mvcResultFromGet.getResponse().getContentAsString()
+                , containsString("\"name\":\"Apple, INC\",\"address\":\"One Infinite Loop\",\"city\":\"Coupertino\",\"country\":\"USA\",\"email\":\"info@apple.com\",\"phone\":\"+1 333 555 8294\",\"beneficialOwners\":[]}"));
     }
 
     @Test
@@ -147,7 +149,7 @@ public class CompanyControllerIntegrationTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andReturn();
 
-        assert mvcResultFromPatch.getResponse().getContentAsString()
-                .contains("\"name\":\"New Name, INC\",\"address\":\"Two Infinite Loop\",\"city\":\"San Francisco\",\"country\":\"Germany\",\"email\":\"company@company.com\",\"phone\":\"+39 333 555 8294\",\"beneficialOwners\":[]}");
+        assertThat("result from patch", mvcResultFromPatch.getResponse().getContentAsString()
+                , containsString("\"name\":\"New Name, INC\",\"address\":\"Two Infinite Loop\",\"city\":\"San Francisco\",\"country\":\"Germany\",\"email\":\"company@company.com\",\"phone\":\"+39 333 555 8294\",\"beneficialOwners\":[]}"));
     }
 }

@@ -5,6 +5,7 @@ import com.nlc.company.repositories.BeneficialOwnerRepository;
 import com.nlc.company.repositories.CompanyRepository;
 import com.nlc.company.resources.BeneficialOwner;
 import com.nlc.company.resources.Company;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -19,6 +20,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -73,7 +76,7 @@ public class BeneficialOwnerControllerTest {
         Collection<BeneficialOwner> result = controller.getAllBeneficialOwners(companyId);
 
         //then
-        assert result.size() > 0;
+        assertThat("result size", result.size(), greaterThan(0));
     }
 
     @Test(expected=CompanyNotFoundException.class)
@@ -99,8 +102,8 @@ public class BeneficialOwnerControllerTest {
         ResponseEntity result = controller.createBeneficialOwner(1L, newBeneficialOwner);
 
         //then
-        assert result.getStatusCodeValue() == 201;
-        assert result.getHeaders().get("Location").get(0).equals(LOCATION_URL);
+        Assert.assertEquals(201, result.getStatusCodeValue());
+        Assert.assertEquals(LOCATION_URL, result.getHeaders().get("Location").get(0));
 
         InOrder inOrder = inOrder(servletMocked, uriComponentBuilderMocked);
 

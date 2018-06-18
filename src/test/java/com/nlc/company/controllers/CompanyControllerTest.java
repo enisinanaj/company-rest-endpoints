@@ -3,6 +3,7 @@ package com.nlc.company.controllers;
 import com.nlc.company.errors.CompanyNotFoundException;
 import com.nlc.company.repositories.CompanyRepository;
 import com.nlc.company.resources.Company;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -17,14 +18,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 
 public class CompanyControllerTest {
 
@@ -70,8 +71,8 @@ public class CompanyControllerTest {
         ResponseEntity response = controller.createNewCompany(companyToCreate);
 
         //then
-        assert response.getStatusCodeValue() == 201;
-        assert response.getHeaders().get("Location").get(0).equals(LOCATION_URL);
+        Assert.assertEquals(201, response.getStatusCodeValue());
+        Assert.assertEquals(LOCATION_URL, response.getHeaders().get("Location").get(0));
 
         InOrder inOrder = inOrder(servletUrilMocked, uriComponentBuilderMocked);
 
@@ -90,8 +91,8 @@ public class CompanyControllerTest {
         ResponseEntity response = controller.createNewCompany(companyToCreate);
 
         //then
-        assert response.getStatusCodeValue() == 201;
-        assert response.getHeaders().get("Location").get(0).equals(LOCATION_URL);
+        Assert.assertEquals(201, response.getStatusCodeValue());
+        Assert.assertEquals(LOCATION_URL, response.getHeaders().get("Location").get(0));
     }
 
     @Test
@@ -106,9 +107,13 @@ public class CompanyControllerTest {
         Collection<Company> allCompanies = controller.getAllCompanies();
 
         //then
-        assert allCompanies != null;
-        assert allCompanies.size() > 0;
-        assert allCompanies.size() == 1;
+        Assert.assertNotNull(allCompanies);
+
+        assertThat("company size",
+                allCompanies.size(),
+                greaterThan(0));
+
+        Assert.assertEquals(1, allCompanies.size());
     }
 
     @Test
@@ -126,8 +131,8 @@ public class CompanyControllerTest {
         Company result = controller.getCompanyById(companyId);
 
         //then
-        assert result != null;
-        assert result.getId().equals(companyId);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(companyId, result.getId());
     }
 
     @Test(expected = CompanyNotFoundException.class)
@@ -161,13 +166,13 @@ public class CompanyControllerTest {
         Company result = controller.updateCompany(companyId, newCompanyData);
 
         //then
-        assert result != null;
-        assert result.getCity().equals("London");
-        assert result.getName().equals("compantName");
-        assert result.getAddress().equals("Mountain view St.");
-        assert result.getCountry().equals("UK");
-        assert result.getEmail().equals("newComp@comp.com");
-        assert result.getPhone().equals("+44 979307373");
+        Assert.assertNotNull(result);
+        Assert.assertEquals("London", result.getCity());
+        Assert.assertEquals("compantName", result.getName());
+        Assert.assertEquals("Mountain view St.", result.getAddress());
+        Assert.assertEquals("UK", result.getCountry());
+        Assert.assertEquals("newComp@comp.com", result.getEmail());
+        Assert.assertEquals("+44 979307373", result.getPhone());
     }
 
     @Test(expected=CompanyNotFoundException.class)
