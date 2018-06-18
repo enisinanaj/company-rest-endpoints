@@ -249,21 +249,16 @@ To have tests run and reports generated, execute the following gradle task:
 gradlew check
 ```
 
-### Break down into end to end tests
-
-`TODO`
-
-### And coding style tests
-
-`TODO`
-
 ## Deployment
 
-`TODO`
+Application is deployed to Heroku at https://restful-cmp.herokuapp.com/companies
 
 ## Authentication
 
-`TODO`
+A suggested authentication method between client and this backend server would be two-legged OAuth 2.0.
+
+_As described in this image_
+![2-legged OAuth 2.0](http://codehustler.org/wp-content/uploads/2014/06/2_legged_oauth_1.png)
 
 ## Built With
 
