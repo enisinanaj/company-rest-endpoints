@@ -146,7 +146,7 @@ Connection: close
 
 {
     "id": 1,
-    "name": "Onew",
+    "name": "One",
     "address": "Infinite",
     "city": "Loop",
     "country": "USA",
