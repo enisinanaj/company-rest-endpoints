@@ -1,0 +1,6 @@
+deployment:
+  staging:
+    branch: master
+    codedeploy:
+      restful-cmp:
+        deployment_group: example-apps
