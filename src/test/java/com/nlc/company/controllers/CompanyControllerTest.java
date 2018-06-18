@@ -151,6 +151,7 @@ public class CompanyControllerTest {
 
         Company newCompanyData = createCompanyWithId(companyId);
         newCompanyData.setCity("London");
+        newCompanyData.setName("compantName");
         newCompanyData.setAddress("Mountain view St.");
         newCompanyData.setCountry("UK");
         newCompanyData.setEmail("newComp@comp.com");
@@ -162,6 +163,7 @@ public class CompanyControllerTest {
         //then
         assert result != null;
         assert result.getCity().equals("London");
+        assert result.getName().equals("compantName");
         assert result.getAddress().equals("Mountain view St.");
         assert result.getCountry().equals("UK");
         assert result.getEmail().equals("newComp@comp.com");

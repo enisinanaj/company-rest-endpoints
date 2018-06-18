@@ -36,6 +36,7 @@ public class CompanyController {
     public Company updateCompany(@PathVariable Long companyId, @RequestBody Company company) {
         Company oldCompany = companyRepository.findById(companyId).orElseThrow(() -> new CompanyNotFoundException(companyId));
 
+        updateCompanyName(company, oldCompany);
         updateCity(company, oldCompany);
         updateAddress(company, oldCompany);
         updateCountry(company, oldCompany);
@@ -50,6 +51,12 @@ public class CompanyController {
     private void updateCity(Company company, Company oldCompany) {
         if (company.getCity() != null) {
             oldCompany.setCity(company.getCity());
+        }
+    }
+
+    private void updateCompanyName(Company company, Company oldCompany) {
+        if (company.getName() != null) {
+            oldCompany.setName(company.getName());
         }
     }
 
